@@ -1,0 +1,111 @@
+﻿//---------------------------------------------------------------------------- 
+//程式功能	考試題庫管理 > 新增試卷
+//---------------------------------------------------------------------------- 
+
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class _B0011 : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+		if (!IsPostBack)
+		{
+			// 檢查使用者權限不存入登入紀錄
+			//Check_Power("B001", false);
+
+			tb_b_date.Text = DateTime.Now.ToString("yyyy/MM/dd");
+			tb_e_date.Text = DateTime.Now.ToString("yyyy/MM/dd");
+		}
+    }
+
+	// Check_Power() 檢查使用者權限並存入登入紀錄
+	private void Check_Power(string f_power, bool bl_save)
+	{
+		// 載入公用函數
+		Common_Func cfc = new Common_Func();
+
+		// 若 Session 不存在則直接顯示錯誤訊息
+		try
+		{
+			if (cfc.Check_Power(Session["mg_sid"].ToString(), Session["mg_name"].ToString(), Session["mg_power"].ToString(), f_power, Request.ServerVariables["REMOTE_ADDR"], bl_save) > 0)
+				Response.Redirect("../Error.aspx?ErrCode=1");
+		}
+		catch
+		{
+			Response.Redirect("../Error.aspx?ErrCode=2");
+		}
+	}
+
+	// 存檔並進行下一步
+	protected void lk_save_Click(object sender, EventArgs e)
+	{
+		string SqlString = "", mErr = "", tmpstr = "";
+		int is_show = 0;
+		DateTime b_time, e_time;
+		
+		if (rb_is_show0.Checked)
+			is_show = 0;
+		else
+			is_show = 1;
+
+		tb_tp_title.Text = tb_tp_title.Text.Trim();
+		if (tb_tp_title.Text.Length < 3)
+		{
+			mErr += "請正確輸入「試卷標題」\\n";
+		}
+
+		tb_tp_desc.Text = tb_tp_desc.Text.Trim();
+		if (tb_tp_desc.Text.Length < 6)
+		{
+			mErr += "請正確輸入「試卷說明」\\n";
+		}
+
+		tmpstr = tb_b_date.Text + " " + tb_b_hour.Text + ":" + tb_b_min.Text;
+		if (!DateTime.TryParse(tmpstr, out b_time))
+			mErr += "「開放進入時間」輸入格式錯誤!\\n";
+
+		tmpstr = tb_e_date.Text + " " + tb_e_hour.Text + ":" + tb_e_min.Text;
+		if (!DateTime.TryParse(tmpstr, out e_time))
+			mErr += "「截止進入時間」輸入格式錯誤!\\n";
+
+		if (mErr == "")
+		{
+			using (SqlConnection Sql_Conn = new SqlConnection(WebConfigurationManager.ConnectionStrings["AppSysConnectionString"].ConnectionString))
+			{
+				SqlString = "Insert Into Ts_Paper (tp_title, is_show, b_time, e_time, tp_desc)";
+				SqlString += " Values (@tp_title, @is_show, @b_time, @e_time, @tp_desc);";
+				SqlString += "Select @tp_sid = Scope_Identity()";
+
+				using (SqlCommand Sql_Command = new SqlCommand(SqlString, Sql_Conn))
+				{
+					Sql_Conn.Open();
+
+					Sql_Command.Parameters.AddWithValue("tp_title", tb_tp_title.Text.Trim());
+					Sql_Command.Parameters.AddWithValue("is_show", is_show);
+					Sql_Command.Parameters.AddWithValue("b_time", b_time);
+					Sql_Command.Parameters.AddWithValue("e_time", e_time);
+					Sql_Command.Parameters.AddWithValue("tp_desc", tb_tp_desc.Text.Trim());
+
+					SqlParameter spt_tp_sid = Sql_Command.Parameters.Add("tp_sid", SqlDbType.Int);
+					spt_tp_sid.Direction = ParameterDirection.Output;
+
+					Sql_Command.ExecuteNonQuery();
+
+					lb_tp_sid.Text = spt_tp_sid.Value.ToString();
+
+					Sql_Conn.Close();
+				}
+			}
+			ClientScript.RegisterStartupScript(this.GetType(), "ClientScript", "alert(\"「試卷主題」新增完成!\\n請繼續處理「考試題目」!\\n\");parent.location.replace(\"B0014.aspx?sid=" + lb_tp_sid.Text + "\");", true);
+		}
+		else
+			ClientScript.RegisterStartupScript(this.GetType(), "ClientScript", "alert(\"" + mErr + "\");", true);
+	}
+}

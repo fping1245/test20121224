@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>捲動式新聞看板</title>
+
+<SCRIPT language="javascript">
+newsText=new Array()
+newsURL=new Array()
+//設定新聞訊息與連結的網址
+newsText[0]="如何快速計算當月的工作天"
+newsText[1]="如何在一字串中插入字元"
+newsText[2]="Dialog下拉式選單的問題"
+newsText[3]="分享偉婕電子書"
+newsText[4]="查詢資料及統計之快速方法"
+newsURL[0]="http://gb.twbts.com/index.php/board,36/topic,4970.0.html"
+newsURL[1]="http://gb.twbts.com/index.php/board,37/topic,4961.5.html"
+newsURL[2]="http://gb.twbts.com/index.php/board,37/topic,4968.1.html"
+newsURL[3]="http://gb.twbts.com/index.php/topic,875.0.html"
+newsURL[4]="http://gb.twbts.com/index.php/topic,4934.0.html"
+
+//基礎參數設置
+scrollheight = 30   //捲動高度
+scrollwidth=200 //新聞看板的寬度
+lineNum = 3 //畫面中同時顯示的新聞數量
+boardheight=scrollheight * lineNum//新聞看板的高度
+doScroll = true //是否進行新聞捲動的旗標變數
+scrollCountTime = 0
+scrollStopTime = 200
+scrollTimeOut = 10   //捲動更新時間
+offSet = scrollheight
+startSetp = 0
+
+//捲動初始設定
+function setScrollTime() {
+document.all.textTable.style.width = scrollwidth
+document.all.textTable.style.height = boardheight
+document.all.textTable.style.overflowX = "hidden"
+document.all.textTable.style.overflowY = "hidden"
+document.all.textTable.scrollTop = 0
+//當滑鼠指標移入時停止新聞捲動
+document.all.textTable.onmouseover = new Function("doScroll = false")
+//當滑鼠指標移出時開始新聞捲動
+document.all.textTable.onmouseout = new Function("doScroll = true")
+//輸出新聞訊息的表格
+scrollTextTable="<table border='0' width=100% cellspacing='0' cellpadding='0'>"
+loopY=0
+for(x=0; x<newsText.length * 2; x++){
+scrollTextTable+= "<tr><td height='" + scrollheight + "'>" + " <img src='img/news.gif'>"
+scrollTextTable+= "<a href='" + newsURL[loopY] +"' target=_blank> "
+scrollTextTable+= newsText[loopY]+ "</a></td></tr>"
+loopY++
+if(loopY>newsText.length-1)loopY=0
+}
+scrollTextTable+="</table>"
+document.all["textTable"].innerHTML=scrollTextTable
+document.all.textTable.scrollTop = 0
+//定時呼叫scrollUp函數進行新聞捲動
+setInterval("scrollUp()",scrollTimeOut)
+}
+
+//捲動與停止新聞
+function scrollUp() {
+if (doScroll == false) return
+offSet ++ 
+ if (offSet == scrollheight + 1) {
+  scrollCountTime ++ 
+  offSet -- 
+   if (scrollCountTime == scrollStopTime) {
+     offSet = 0
+     scrollCountTime = 0
+   }
+ }else {
+  startSetp = document.all.textTable.scrollTop + (scrollheight * lineNum)
+ document.all.textTable.scrollTop ++
+  if (startSetp == document.all.textTable.scrollTop + (scrollheight * lineNum)) {
+    document.all.textTable.scrollTop = scrollheight * (lineNum-1)
+    document.all.textTable.scrollTop ++ 
+  }
+ }
+}
+</SCRIPT>
+</head>
+<body bgcolor="#FFFFFF" onLoad="setScrollTime()">
+<table width="222" cellspacing="0" cellpadding="0">
+<tr><td colspan="3">
+<img border="0" src="img/top.gif" width="222" height="30"></td></tr>
+<tr><td background="img/right.gif" width="15"></td><td width="201">
+ <div id="textTable" bgcolor="#FFFFFF"></div>
+</td><td width="6" background="img/left.gif"></td>
+</tr><tr><td colspan="3">
+<img border="0" src="img/buttom.gif" width="222" height="10"></td>
+</tr></table>
+</body>
+</html>

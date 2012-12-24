@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF8" />
+<title>插入表格</title>
+<style type="text/css">
+body,td 
+{
+	font-family:細明體;
+	font-size:12px;
+	background-color:ButtonFace;
+}
+.cmdbtn 
+{
+	width:45px;
+	height:20px;
+}
+.indata
+{
+	font-family:Arial;
+	font-size:10px;
+	width:24px;
+	height:18px;
+	text-align:right;
+}
+div     
+{
+	cursor:default;
+}
+</style>
+<script language="javascript" type="text/javascript">
+function WorkOK(){
+	var tbdata, tmpcol, tmprow, tbcol, tbrow, tbalign, tbwidth, iCnt;
+	
+	if (tbg[0].checked) tbalgn = "left";
+	if (tbg[1].checked) tbalgn = "center";
+	if (tbg[2].checked) tbalgn = "right";
+
+	if (tbaa[0].checked) tbwidth = "%";
+	if (tbaa[1].checked) tbwidth = "px";
+	if (tbaa[2].checked) tbwidth = "pt";
+
+	tmpcol = "<td align=\"" + tbalgn + "\"></td>";
+	tbcol = "";
+	
+	for (iCnt = 0; iCnt < tbc.value; iCnt++ ){
+		tbcol = tbcol + tmpcol;
+	}
+
+	tbcol = "<tr>" + tbcol + "</tr>";
+
+	tbrow = "";
+	for (iCnt = 0; iCnt < tbd.value; iCnt++ ){
+		tbrow = tbrow + tbcol;		
+	}
+	tbdata = "<table border=\"" + tbb.value + "\" cellspacing=\"" + tbe.value + "\" cellpadding=\"" + tbf.value + "\" style=\"width:" + tba.value + tbwidth + "\">" + tbrow + "</table>";
+	window.returnValue = tbdata;
+	window.close();
+}
+</script>
+</head>
+<body>
+<center>
+<table border="1" cellpadding="4" cellspacing="0" style="margin:10px 0px 0px 0px">
+<tr align="center">
+	<td>&nbsp;表格寬度&nbsp;</td>
+	<td><input type="text" id="tba" size="6" value="100" maxlength="6" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td><input type="radio" name="tbaa" id="tbd1" checked />%<input type="radio" name="tbaa" id="tbd2" />px<input type="radio" name="tbaa" id="tbd3" />pt</td>
+</tr>
+<tr align="center">
+	<td>&nbsp;邊框粗細&nbsp;</td>
+	<td><input type="text" name="tbb" id="tbb" size="2" value="1" maxlength="2" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td>像素</td>
+</tr>
+<tr align="center">
+	<td>表格欄數</td>
+	<td><input type="text" name="tbc" id="tbc" size="2" value="2" maxlength="2" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td>欄</td>
+</tr>
+<tr align="center">
+	<td>表格列數</td>
+	<td><input type="text" name="tbr" id="tbd" size="2" value="2" maxlength="2" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td>列</td>
+</tr>
+<tr align="center">
+	<td>邊框間距</td>
+	<td width="24"><input type="text" name="tbe" id="tbs" size="2" maxlength="2" value="0" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td width="85">px</td>
+</tr>
+<tr align="center">
+	<td>欄內留白</td>
+	<td width="24"><input type="text" name="tbf" id="tbp" size="2" maxlength="2" value="0" onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" class="indata" /></td>
+	<td>px</td>
+</tr>
+<tr align="center">
+	<td>欄位對齊</td>
+	<td colspan="2"><input type="radio" name="tbg" id="tba1" checked />左<input type="radio" name="tbg" id="tbg2" />中<input type="radio" name="tbg" id="tbg3" />右</td>
+</tr>
+</table><br />
+<table border="0" cellpadding="0" cellspacing="0" style="margin:2px 0px 5px 0px">
+<tr><td width="50" align="center"><input type="button" onclick="window.close();" value="取消" class="cmdbtn" /></td>
+	<td width="50" align="center"><input type="button" onclick="WorkOK();" value="完成" class="cmdbtn" /></td>
+</tr>
+</table>
+</center>
+</body>
+</html>

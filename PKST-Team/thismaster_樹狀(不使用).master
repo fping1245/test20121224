@@ -1,0 +1,228 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="thismaster_樹狀(不使用).master.cs"
+    Inherits="thismaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta http-equiv="Content-Script-Type" content="text/javascript" />
+    <script src="Scripts/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <!-- ▼頁面標題 -->
+    <title>IT Management Service</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="components/css/default.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .text11pt
+        {}
+    </style>
+</head>
+<SCRIPT language=JavaScript> 
+<!--
+    function openevent(url) {
+        edmwin = window.open(url, "edmwindow", "resizable=no, scrollbars=no, menubar=no, toolbar=no, width=650,height=250,left=20,top=20");
+    }
+    function openedm(url) {
+        edmwin = window.open(url, "edmwindow", "resizable=no, scrollbars=no, menubar=no, toolbar=no, width=650,height=410,left=20,top=20");
+    }
+    function openwinqa(url) {
+        var qq;
+        qq = form1.qcno.value;
+        qawindow = window.open(url + "?qcno=" + qq.replace(/\+/gi, "%2B"), "qawindow", "resizable=yes, scrollbars=yes, menubar=no, toolbar=yes, width=650,height=550,left=40,top=40");
+        //qawindow=window.open(url +"?qcno=" + form1.qcno.value,"qawindow", "resizable=yes, scrollbars=yes, menubar=no, toolbar=yes, width=450,height=500,left=40,top=40");
+    }
+    function openswin(url) {
+        swindow = window.open(url, "swindow", "resizable=yes, scrollbars=yes, menubar=no, toolbar=yes, width=900,height=600,left=0,top=0");
+    }
+    function openswinlocal(url) {
+        
+        alert('start');
+        //swindow = window.location.href(url);
+        swindow = $('#contents2').attr('src', url);
+        alert('end');
+
+    }
+
+
+       /* var url = $(this).attr('href');
+        $('#contents').attr('src', url); */
+        
+    
+
+    function openswinlocalre(url) {
+        swindow = window.location.replace(url);
+    }
+    function carryemail() {
+        document.cookie = "vemail=" + f.vemail.value;
+    }
+    function carrycode() {
+        document.cookie = "qcno=" + form1.qcno.value;
+    }
+
+    function MM_preloadImages() { //v3.0
+        var d = document; if (d.images) {
+            if (!d.MM_p) d.MM_p = new Array();
+            var i, j = d.MM_p.length, a = MM_preloadImages.arguments; for (i = 0; i < a.length; i++)
+                if (a[i].indexOf("#") != 0) { d.MM_p[j] = new Image; d.MM_p[j++].src = a[i]; } 
+        }
+    }
+
+    function MM_swapImgRestore() { //v3.0
+        var i, x, a = document.MM_sr; for (i = 0; a && i < a.length && (x = a[i]) && x.oSrc; i++) x.src = x.oSrc;
+    }
+
+    function MM_findObj(n, d) { //v4.01
+        var p, i, x; if (!d) d = document; if ((p = n.indexOf("?")) > 0 && parent.frames.length) {
+            d = parent.frames[n.substring(p + 1)].document; n = n.substring(0, p);
+        }
+        if (!(x = d[n]) && d.all) x = d.all[n]; for (i = 0; !x && i < d.forms.length; i++) x = d.forms[i][n];
+        for (i = 0; !x && d.layers && i < d.layers.length; i++) x = MM_findObj(n, d.layers[i].document);
+        if (!x && d.getElementById) x = d.getElementById(n); return x;
+    }
+
+    function MM_swapImage() { //v3.0
+        var i, j = 0, x, a = MM_swapImage.arguments; document.MM_sr = new Array; for (i = 0; i < (a.length - 2); i += 3)
+            if ((x = MM_findObj(a[i])) != null) { document.MM_sr[j++] = x; if (!x.oSrc) x.oSrc = x.src; x.src = a[i + 2]; }
+    }
+
+
+
+
+//-->
+</SCRIPT>
+<%--<SCRIPT language=jquery>
+    function openswinlocal(url) {
+        /*swindow = window.location.href(url);*/
+        swindow = $('#contents').attr('src', url);
+
+    }
+
+</SCRIPT>--%>
+
+<body>
+    <form id="form1" runat="server">
+    <div id="wrap">
+        <div id="header">
+         <!-- ▼LOGO圖片 -->
+           <h1>
+                <a href="index.html">
+                    <span>數位教育研究所</span></a></h1>
+            <!-- ▼文案 -->
+            <p class="copy">
+                解決擾人的排課問題</p>
+            <ul id="navi">
+                <!-- ▼▼導覽列從此開始▼▼ -->
+                <li id="navi_01"><a href="~//index.aspx">首頁<br />
+                    <span>TopPage</span></a> </li>
+                <li id="navi_02"><a href=#>教室資訊<br />
+                    <span>information</span></a> </li>
+                <li id="navi_03"><a href=#>班級課程管理<br />
+                    <span>Course management</span> </a></li>
+                <li id="navi_04"><a href=#>編排課表<br />
+                    <span>Timetabling</span></a> </li>
+                <li id="navi_05"><a href=#>查詢系統<br />
+                    <span>Query system</span></a> </li>
+                <!-- ▲▲導覽列到此為止▼▼ -->
+            </ul>
+        </div>
+        <div id="contents" class="clearfix">
+         
+            <div id="sub_area">
+                <!-- ▼▼網站導覽列1從此開始▼▼ -->
+                <div class="sub_navi">
+                    <h2>
+                        教室資訊</h2>
+                    <ul>
+                        <li><a href="service1.html#s_01">自行添加1</a></li>
+                        <li><a href="service1.html#s_02">自行添加2</a></li>
+                        <li><a href="service1.html#s_03">自行添加3</a></li>
+                        <li><a href="service1.html#s_04">自行添加4</a></li>
+                        <li><a href="service1.html#s_05">自行添加5</a></li>
+                    </ul>
+                </div>
+                <!-- ▲▲網站導覽列1到此為止▼▼ -->
+
+                <!-- ▼▼網站導覽列2從此開始▼▼ -->
+                <div class="sub_navi">
+                    <h2>
+                        查詢系統</h2>
+
+                        <li>
+                    <asp:TreeView ID="tv_func" runat="server" EnableClientScript="False" ExpandDepth="1"
+                        AutoGenerateDataBindings="False" 
+                        LineImagesFolder="~/Images/TreeLineImages" CssClass="text11pt"
+                        Width="74%">
+                    <ParentNodeStyle CssClass="text11pt" Width="100%" />
+                    <SelectedNodeStyle CssClass="text11pt" Width="100%" />
+                    <RootNodeStyle CssClass="text11pt" Width="100%" />
+                    <NodeStyle CssClass="text11pt" Width="100%" />
+                    <LeafNodeStyle CssClass="text11pt" Width="100%" />
+                    </asp:TreeView>
+                        </li>
+
+
+                </div>
+                <!-- ▲▲網站導覽列2到此為止▼▼ -->
+                <div id="contact">
+                    <!-- ▼線上客服標題 -->
+                    <h2>
+                        線上客服</h2>
+                    <dl>
+                        <!-- ▼▼線上客服從此開始▼▼ -->
+                        <dt>E-mail</dt>
+                        <dd>
+                            info@xxxx.xxx</dd>
+                        <dt>Tel</dt>
+                        <dd>
+                            00-0000-0000</dd>
+                        <dt>受理時間</dt>
+                        <dd>
+                            星期一～五<br />
+                            10點～18點</dd>
+                        <!-- ▲▲線上客服到此為止▼▼ -->
+                    </dl>
+                </div>
+                <div id="contact">
+                    <!-- ▼線上客服標題 -->
+                    <h2>
+                        聯絡方式</h2>
+                    <p>
+                        <iframe id="contents1" frameborder="0" name="contents1" scrolling="no" ></iframe>
+                    </p>
+                    <dl>
+                        <!-- ▼▼聯絡方式從此開始▼▼ -->
+                        <dt>E-mail</dt>
+                        <dd>
+                            info@xxxx.xxx</dd>
+                        <dt>Tel</dt>
+                        <dd>
+                            00-0000-0000</dd>
+
+                        <!-- ▲▲聯絡方式到此為止▼▼ -->
+                    </dl>
+                </div>
+
+            </div>
+               <div id="main_area">
+                <div id="main">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </iframe> 
+
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <p>
+                <img src="components/img/contents_footer.png" width="870" height="20" alt="" /></p>
+            <!-- ▼版權聲明 -->
+            <address>
+                &copy; MSIT90 第四組</address>
+        </div>
+    </div>
+    </form>
+    </body>
+</html>

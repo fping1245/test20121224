@@ -1,0 +1,139 @@
+﻿body
+{
+	font-size:9pt;
+	margin:0 0 0 0;
+	background-color:#f7f7f7;
+	white-space:nowrap;
+}
+td
+{
+	font-size: 9pt;
+}
+tbody
+{
+	font-size: 9pt;
+}
+a:link
+{
+	color: #2E46C0;
+	font-style: normal;
+	text-decoration: none;
+	cursor: hand;
+	font-size: 9pt;
+}
+a:visited
+{
+	color: #2E46C0;
+	font-style: normal;
+	text-decoration: none;
+}
+a:active
+{
+	color: #0000FF;
+	font-style: normal;
+	text-decoration: none;
+}
+a:hover
+{
+	color: #FF0000;
+	text-decoration: none;
+}
+unknown
+{
+	font-size: 9pt;
+	line-height: 15px;
+}
+.text7pt
+{
+	font-size: 7pt;
+	line-height: 10pt;
+}
+.text8pt
+{
+	font-size: 8pt;
+	line-height: 11pt;
+}
+.text9pt
+{
+	font-size: 9pt;
+	line-height: 12pt;
+}
+.text10pt
+{
+	font-size: 10pt;
+	line-height: 13pt;
+}
+.text11pt
+{
+	font-size: 11pt;
+	line-height: 14pt;
+}
+.text12pt
+{
+	font-size: 12pt;
+	line-height: 15pt;
+}
+.text13pt
+{
+	font-size: 13pt;
+	line-height: 16pt;
+}
+.text14pt
+{
+	font-size: 14pt;
+	line-height: 17pt;
+}
+.text16pt
+{
+	font-size: 16pt;
+	line-height: 19pt;
+}
+.text18pt
+{
+	font-size: 18pt;
+	line-height: 21pt;
+}
+.text20pt
+{
+	font-size: 20pt;
+	line-height: 23pt;
+}
+a.abtn:active
+{
+    text-decoration: none;
+    background-color:Gray;
+    font-size: 10pt;
+    height: 18pt;
+    border-color: Black;
+    border-style: Double;
+    color: Black;
+}
+a.abtn:link
+{
+    text-decoration: none;
+    background-color:#F0F0F0;
+    font-size: 10pt;
+    height: 18pt;
+    border-color: Black;
+    border-style: Double;
+    color: Black;
+}
+a.abtn:visited
+{
+    text-decoration: none;
+    background-color:Silver;
+    font-size: 10pt;
+    height: 18pt;
+    border-color: Black;
+    border-style: Double;
+    color: Black;
+}
+a.abtn:hover
+{
+    text-decoration: none;
+    background-color: #FAFAD2;
+    font-size: 10pt;
+    height: 18pt;
+    color: Black;
+	border-style: solid;
+}
